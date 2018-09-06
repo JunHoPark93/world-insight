@@ -25,3 +25,30 @@ worldData <- rbind(period1, period2)
 worldData <- rbind(worldData, period3)
 worldData <- rbind(worldData, period4)
 worldData <- rbind(worldData, period5)
+
+
+# removing comma
+worldData$수입중량 <- gsub(",","",worldData$수입중량)
+worldData$수출중량 <- gsub(",","",worldData$수출중량)
+worldData$수출금액 <- gsub(",","",worldData$수출금액)
+worldData$수입금액 <- gsub(",","",worldData$수입금액)
+worldData$무역수지 <- gsub(",","",worldData$무역수지)
+
+# changing data tpye from char to numeric
+worldData$수입중량 <- as.numeric(worldData$수입중량)
+worldData$수출중량 <- as.numeric(worldData$수출중량)
+worldData$수출금액 <- as.numeric(worldData$수출금액)
+worldData$수입금액 <- as.numeric(worldData$수입금액)
+worldData$무역수지 <- as.numeric(worldData$무역수지)
+
+# changing column name 
+worldData <- rename(worldData, period = "기간")
+worldData <- rename(worldData, prodNm = "품목명")
+worldData <- rename(worldData, prodCode = "품목코드")
+worldData <- rename(worldData, countryKor = "국가명")
+worldData <- rename(worldData, exprtWgh = "수출중량")
+worldData <- rename(worldData, imprtWgh = "수입중량")
+worldData <- rename(worldData, exprtMny = "수출금액")
+worldData <- rename(worldData, imprtMny = "수입금액")
+worldData <- rename(worldData, tradeBalance = "무역수지")
+
