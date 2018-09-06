@@ -1,15 +1,15 @@
-#
-# This is the user-interface definition of a Shiny web application. You can
-# run the application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-# 
-#    http://shiny.rstudio.com/
-#
+source("ui_mainPage.R")
 
-library(shiny)
-
-# Define UI for application that draws a histogram
-shinyUI(
-   
+navbarPage("WorldInsight", id="nav",
+           
+           tabPanel("Start",
+                    div(class="outer",
+                        
+                        tags$head(
+                          includeCSS("../Data/mainpageStyles.css")
+                        ),
+                        
+                        frontp()
+                    )
+           )
 )
