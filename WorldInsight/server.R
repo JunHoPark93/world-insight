@@ -68,8 +68,22 @@ function(input, output, session) {
     ))
     leafletProxy("map") %>% addPopups(lngInput, latInput, content, layerId = numericCodeInput)
   }
- 
   
-  
-  
+  ## Graph ##################
+  observe({
+    countryName_graph <- input$countryName_graph
+    option_graph <- input$option_graph
+    prodName_graph <- input$prodName_graph
+    
+    graph_y <- paste0(option_graph,"Total")
+    graph_x = "period"
+    
+    output$yearlyCountryPlot <- renderPlot({
+      
+      # passsing variable in ggplot x,y data
+      ggplot(data = sumCountryProductPerPeriod %>% filter(countryKor == countryName_graph & prodNm == prodName_graph), aes_string(x=graph_x, y=graph_y)) + geom_col()
+      
+    })
+  })
+
 }
