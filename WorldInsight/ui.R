@@ -29,7 +29,39 @@ navbarPage("Superzip", id="nav",
                                       selectInput("prodName", "품목", prodName, selected = "살아 있는 동물"), 
                                       selectInput("option", "옵션", option, selected = "imprtMny")))
                               
-           ) # end of tab Panel (World Map)
+           ), # end of tab Panel (World Map)
+           
+           tabPanel("Yearly Country Graph",
+                    fluidPage(    
+                      
+                      # Give the page a title
+                      titlePanel("Product by Region"),
+                      
+                      # Generate a row with a sidebar
+                      sidebarLayout(      
+                        
+                        # Define the sidebar with one input
+                        sidebarPanel(
+                          selectInput("countryName_graph", "지역:", 
+                                      country$countryKor, selected = "가나"),
+                          selectInput("prodName_graph", "품목명", prodName, selected = "살아 있는 동물"),
+                          selectInput("option_graph", "옵션" , option, selected = "imprtMny"),
+                          hr()
+                        ),
+                        
+                        # Create a spot for the barplot
+                        mainPanel(
+                          plotOutput("yearlyCountryPlot")  
+                        )))
+          ) # end of tab panel (Yearly Countr Graph)
                         
                       
 )
+
+
+
+
+
+
+
+
