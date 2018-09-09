@@ -3,6 +3,7 @@ library(leaflet)
 library(readxl)
 library(scales)
 library(ggplot2)
+library(lazyeval)
 
 ## read global country xslx
 country <- read_excel("../data/country.xlsx")

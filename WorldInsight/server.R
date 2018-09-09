@@ -29,7 +29,7 @@ function(input, output, session) {
     options <- input$option
     print(is.character(options))
     
-    mapData <- worldDataFiltered %>% filter(prodNm == input$prodName) %>% filter(period %in% input$period) %>% group_by(countryKor, lat, lng, numericCode) %>% summarise(total = sum(imprtMny))
+    mapData <- worldDataFiltered %>% filter(prodNm == input$prodName) %>% filter(period %in% input$period) %>% group_by(countryKor, lat, lng, numericCode) %>% summarise_(total = interp(~sum(var, na.rm = TRUE), var = as.name(options)))
     
     print(mapData)
     colorData <- mapData$total
@@ -68,5 +68,8 @@ function(input, output, session) {
     ))
     leafletProxy("map") %>% addPopups(lngInput, latInput, content, layerId = numericCodeInput)
   }
+ 
+  
+  
   
 }
