@@ -1,6 +1,7 @@
 library(dplyr)
 library(leaflet)
 library(readxl)
+library(scales)
 
 ## read global country xslx
 country <- read_excel("../data/country.xlsx")
@@ -52,3 +53,43 @@ worldData <- rename(worldData, exprtMny = "수출금액")
 worldData <- rename(worldData, imprtMny = "수입금액")
 worldData <- rename(worldData, tradeBalance = "무역수지")
 
+# 결측치 제거
+worldData <- left_join(worldData, country)
+worldDataFiltered <- na.omit(worldData)
+
+# 무역수지 계산
+worldDataFiltered <- worldDataFiltered %>% mutate(ifSurplus = ifelse(tradeBalance > 0, "흑자", "적자"))
+
+# 기간 별 나라별 4개영역 총계
+sumCountryPerPeriod <- worldDataFiltered %>% group_by(countryKor, period) %>% summarise(imprtWghTotal = sum(imprtWgh), imprtMnyTotal = sum(imprtMny), exprtWghTotal = sum(exprtWgh), exprtMnyTotal = sum(exprtMny))
+
+# 기간 별 나라별 품목 별 4개 영역 총계
+sumCountryProductPerPeriod <- worldDataFiltered %>% group_by(countryKor, period, prodNm) %>% summarise(imprtWghTotal = sum(imprtWgh), imprtMnyTotal = sum(imprtMny), exprtWghTotal = sum(exprtWgh), exprtMnyTotal = sum(exprtMny))
+
+# 품목명 읽기
+prodNameCSV <- read.csv("../data/prodName.csv", stringsAsFactors = F)
+prodName <- prodNameCSV$prodNm
+
+# 현재까지 년도
+periodGlobal <- c(2000:2018)
+
+option <- c(
+  "수출중량" = "exprtWgh",
+  "수입중량" = "imprtWgh",
+  "수출금액" = "exprtMny",
+  "수입금액" = "imprtMny"
+)
+
+optionMoney <- c(
+  "수출금액" = "exprtMny",
+  "수입금액" = "imprtMny"
+)
+
+xlim <- list(
+  min = min(sumCountryPerPeriod$imprtMnyTotal) ,
+  max = max(sumCountryPerPeriod$imprtMnyTotal) + 500
+)
+ylim <- list(
+  min = min(sumCountryPerPeriod$exprtMnyTotal) ,
+  max = max(sumCountryPerPeriod$exprtMnyTotal) + 500
+)
