@@ -53,7 +53,71 @@ navbarPage("Superzip", id="nav",
                         mainPanel(
                           plotOutput("yearlyCountryPlot")  
                         )))
-          ) # end of tab panel (Yearly Countr Graph)
+          ), # end of tab panel (Yearly Countr Graph)
+          
+          tabPanel("Money Variation",
+                   googleChartsInit(),
+                   
+                   # Use the Google webfont "Source Sans Pro"
+                   tags$link(
+                     href=paste0("http://fonts.googleapis.com/css?",
+                                 "family=Source+Sans+Pro:300,600,300italic"),
+                     rel="stylesheet", type="text/css"),
+                   tags$style(type="text/css",
+                              "body {font-family: 'Source Sans Pro'}"
+                   ),
+                   
+                   h2("MoneyFlow Chart"),
+                   
+                   googleBubbleChart("chart",
+                                     width="100%", height = "475px",
+                                     
+                                     options = list(
+                                       fontName = "Source Sans Pro",
+                                       fontSize = 13,
+                                       # Set axis labels and ranges
+                                       hAxis = list(
+                                         title = "Import Money Total ($USD)",
+                                         viewWindow = xlim
+                                       ),
+                                       vAxis = list(
+                                         title = "Export Money Total (years)",
+                                         viewWindow = ylim
+                                       ),
+                                       # The default padding is a little too spaced out
+                                       chartArea = list(
+                                         top = 50, left = 75,
+                                         height = "75%", width = "75%"
+                                       ),
+                                       # Allow pan/zoom
+                                       explorer = list(),
+                                       # Set bubble visual props
+                                       bubble = list(
+                                         opacity = 0.4, stroke = "none",
+                                         # Hide bubble label
+                                         textStyle = list(
+                                           color = "none"
+                                         )
+                                       ),
+                                       # Set fonts
+                                       titleTextStyle = list(
+                                         fontSize = 16
+                                       ),
+                                       tooltip = list(
+                                         textStyle = list(
+                                           fontSize = 12
+                                         )
+                                       )
+                                     )
+                   ),
+                   fluidRow(
+                     shiny::column(4, offset = 4,
+                                   sliderInput("year_variation", "Year",
+                                               2000, 2018,
+                                               value = 2000, animate = TRUE)
+                     )
+                   )
+          ) # end of tab panel (Money Variation)
                         
                       
 )
