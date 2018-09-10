@@ -117,7 +117,38 @@ navbarPage("Superzip", id="nav",
                                                value = 2000, animate = TRUE)
                      )
                    )
-          ) # end of tab panel (Money Variation)
+          ), # end of tab panel (Money Variation)
+          
+          tabPanel("Surplus Table",
+                   fluidPage(
+                     titlePanel("Surplus DataTable"),
+                     
+                     # Create a new Row in the UI for selectInputs
+                     fluidRow(
+                       selectInput("countryName_table",
+                                   "나라 이름:",
+                                   country$countryKor,
+                                   selected = "가나"
+                       ),
+                       
+                       selectInput("prodName_table",
+                                   "품목명:",
+                                   prodName,
+                                   selected = "살아 있는 동물"
+                       ),
+                       
+                       selectInput("ifSurplus_table",
+                                   "무역수지:",
+                                   c("적자", "흑자"),
+                                   selected = "적자")
+                     ),
+                     # Create a new row for the table.
+                     fluidRow(
+                       DT::dataTableOutput("surplustable")
+                     )
+                   )
+                   
+          ) # end of tabPanel(Surplus Table)
                         
                       
 )
