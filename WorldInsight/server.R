@@ -85,5 +85,34 @@ function(input, output, session) {
       
     })
   })
+  
+  ## Variation #################
+  
+  defaultColors <- c("#3366cc", "#dc3912", "#ff9900", "#109618", "#990099", "#0099c6", "#dd4477")
+  series <- structure(
+    lapply(defaultColors, function(color) { list(color=color) }),
+    names = levels(country$countryKor)
+  )
+  
+  yearData <- reactive({
+    df <- sumCountryPerPeriod %>%
+      filter(period == input$year_variation) %>% 
+      select(countryKor, imprtMnyTotal, exprtMnyTotal,
+             imprtWghTotal, exprtWghTotal) %>%
+      arrange(countryKor)
+  })
+  
+  output$chart <- reactive({
+    # Return the data and options
+    list(
+      data = googleDataTable(yearData()),
+      options = list(
+        title = sprintf(
+          "Import Money vs Export Money, %s",
+          input$year_variation),
+        series = series
+      )
+    )
+  })
 
 }
