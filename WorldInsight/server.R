@@ -70,6 +70,7 @@ function(input, output, session) {
   }
   
   ## Graph ##################
+  
   observe({
     countryName_graph <- input$countryName_graph
     option_graph <- input$option_graph
@@ -114,5 +115,12 @@ function(input, output, session) {
       )
     )
   })
+  
+  ## Surplus Graph ########
+  output$surplustable <- DT::renderDataTable(DT::datatable({
+    data <- worldDataFiltered %>% filter(countryKor == input$countryName_table & prodNm == input$prodName_table & ifSurplus == input$ifSurplus_table) %>% select(period, ifSurplus, prodNm, countryKor, countryEng, tradeBalance, exprtWgh, imprtWgh, exprtMny, imprtMny)
+    data
+  }))
+  
 
 }
