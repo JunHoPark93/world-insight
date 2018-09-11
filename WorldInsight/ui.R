@@ -148,7 +148,23 @@ navbarPage("Superzip", id="nav",
                      )
                    )
                    
-          ) # end of tabPanel(Surplus Table)
+          ), # end of tabPanel (Surplus Table)
+          
+          
+          tabPanel("Top Countries",
+                   fluidPage (    
+                     titlePanel("Top Nations"),
+                     
+                     sidebarLayout(      
+                       sidebarPanel(
+                         selectInput("prodName_top", "품목명", choices = prodName),
+                         selectInput("option_top", "옵션" , option, selected = "imprtMny"),
+                         hr()
+                       ),
+
+                       mainPanel(
+                         plotOutput("topPlot"))))
+          ) # end of tabPanel (Top Countries)
                         
                       
 )
