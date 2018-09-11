@@ -122,5 +122,26 @@ function(input, output, session) {
     data
   }))
   
-
+  
+  ## Top Nations #########
+  
+  observe({
+    
+    prodName_top <- input$prodName_top
+    option_top <- input$option_top
+    
+    # get top 5 countries
+    topnation <- worldDataFiltered %>% group_by(countryKor, prodNm) %>% filter(prodNm == prodName_top) %>% summarise_(total = interp(~sum(var, na.rm=TRUE), var = as.name(option_top)))
+    
+    topnation <- topnation %>% arrange(desc(topnation$total)) # arranging total in descending order
+    topnation <- head(topnation,5)                            # get top 5
+    topnation <- topnation$countryKor
+    
+    linedata <- worldDataFiltered %>% filter(countryKor %in% topnation & prodNm == prodName_top) %>% group_by(countryKor, countryEng, prodNm, period) %>% summarise_(total = interp(~sum(var, na.rm = TRUE), var = as.name(option_top)))
+    
+    output$topPlot <- renderPlot({
+      ggplot(data = linedata, aes(x = period, y = total, group = countryEng, colour = countryEng)) + geom_line()
+    })
+  })
+  
 }
