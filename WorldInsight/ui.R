@@ -164,9 +164,22 @@ navbarPage("Superzip", id="nav",
 
                        mainPanel(
                          plotOutput("topPlot"))))
-          ) # end of tabPanel (Top Countries)
-                        
-                      
+          ), # end of tabPanel (Top Countries)
+          
+          
+          tabPanel("Top10 Product",
+                   fluidPage(
+                     titlePanel("Top10 Trade"),
+
+                     fluidRow(
+                       selectInput("period_topTrade", "기간", periodGlobal, selected = '2010'),
+                       selectInput("option_topTrade", "옵션", optionMoney, selected = "imprtMny")
+                     ),
+                     
+                     fluidRow(
+                       DT::dataTableOutput("topCountriesTable")))
+                   
+          ) # end of tabPanel (Top10 Product)
 )
 
 
