@@ -144,4 +144,25 @@ function(input, output, session) {
     })
   })
   
+
+  ## Top10 Trade ############
+  
+  observe({
+    period_topTrade <- input$period_topTrade
+    
+    topTrade <- worldDataFiltered %>% filter(period == period_topTrade) %>% group_by(period, prodNm) %>% summarise(imprtMnyTotal = sum(imprtMny), exprtMnyTotal = sum(exprtMny))
+    
+    if (input$option_topTrade == 'imprtMny') {
+      topTrade <- topTrade %>% arrange(desc(topTrade$imprtMnyTotal))
+    } else if(input$option_topTrade == 'exprtMny') {
+      topTrade <- topTrade %>% arrange(desc(topTrade$exprtMnyTotal))
+    }
+    
+    topTrade <- head(topTrade,10)
+    
+    output$topCountriesTable <-  DT::renderDataTable(DT::datatable({
+      topTrade 
+    }))
+  })
+  
 }
