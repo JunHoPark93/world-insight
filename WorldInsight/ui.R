@@ -9,7 +9,7 @@ navbarPage("WorldInsight", id="nav",
                         tags$head(
                           # Include our custom CSS
                           includeCSS("styles.css"),
-                          includeCSS("../Data/mainpageStyles.css"),
+                          includeCSS("mainpageStyles.css"),
                           includeScript("gomap.js")
                         ),
                         frontp())
