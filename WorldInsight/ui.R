@@ -1,7 +1,7 @@
 library(leaflet)
 source("ui_mainPage.R")
 
-navbarPage("Superzip", id="nav",
+navbarPage("WorldInsight", id="nav",
            
            tabPanel("Start",
                     div(class="outer",
