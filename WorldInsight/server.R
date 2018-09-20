@@ -1,3 +1,4 @@
+library(dplyr)
 set.seed(100)
 
 function(input, output, session) {

@@ -5,9 +5,10 @@ library(scales)
 library(ggplot2)
 library(lazyeval)
 library(googleCharts)
+library(shiny)
 
 ## read global country xslx
-country <- read_excel("../data/country.xlsx")
+country <- read_excel("data/country.xlsx")
 
 # changing column name (global country file)
 country <- rename(country, countryEng = "Country")
@@ -18,11 +19,11 @@ country <- rename(country, lat = "Latitude")
 country <- rename(country, lng = "Longitude")
 country <- rename(country, countryKor = "Country_Kor")
 
-period1 <- read_excel("../data/Data-2000-2003.xlsx")
-period2 <- read_excel("../data/Data-2004-2007.xlsx")
-period3 <- read_excel("../data/Data-2008-2011.xlsx")
-period4 <- read_excel("../data/Data-2012-2015.xlsx")
-period5 <- read_excel("../data/Data-2016-2018.xlsx")
+period1 <- read_excel("data/Data-2000-2003.xlsx")
+period2 <- read_excel("data/Data-2004-2007.xlsx")
+period3 <- read_excel("data/Data-2008-2011.xlsx")
+period4 <- read_excel("data/Data-2012-2015.xlsx")
+period5 <- read_excel("data/Data-2016-2018.xlsx")
 
 
 worldData <- rbind(period1, period2)
@@ -70,7 +71,7 @@ sumCountryPerPeriod <- worldDataFiltered %>% group_by(countryKor, period) %>% su
 sumCountryProductPerPeriod <- worldDataFiltered %>% group_by(countryKor, period, prodNm) %>% summarise(imprtWghTotal = sum(imprtWgh), imprtMnyTotal = sum(imprtMny), exprtWghTotal = sum(exprtWgh), exprtMnyTotal = sum(exprtMny))
 
 # 품목명 읽기
-prodNameCSV <- read.csv("../data/prodName.csv", stringsAsFactors = F)
+prodNameCSV <- read.csv("data/prodName.csv", stringsAsFactors = F)
 prodName <- prodNameCSV$prodNm
 
 # 현재까지 년도
