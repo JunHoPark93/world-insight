@@ -8,28 +8,40 @@
 
 ### 1. 세계 지도
 
+![image](https://user-images.githubusercontent.com/20608121/47827748-fcd4d280-ddc2-11e8-8b6e-16b53c3974e4.png)
+
 세계 지도를 기반으로 연도, 품목, 옵션 (차후설명) 선택을 통해 어느 나라에서 얼마만
 큼의 유통이 발생 했는지 한눈에 파악 할 수 있다.
 
 ### 2. 그래프
+
+![image](https://user-images.githubusercontent.com/20608121/47827787-23930900-ddc3-11e8-9d43-b1135293238f.png)
 
 막대 그래프를 통하여 나라별로 어떤 품목이 연도별로 얼마만큼의 유통량을 차지하고
 있는지 볼 수 있다.
 
 ### 3. 수입금액 / 수출금액 변화 그래프
 
+![image](https://user-images.githubusercontent.com/20608121/47827789-28f05380-ddc3-11e8-8bc0-3fb596164455.png)
+
 연도 별 수입금액/수출금액을 애니메이션 효과와 함께 변화과정을 살펴 볼 수 있다.
 
 ### 4. 무역수지 별 현황
+
+![image](https://user-images.githubusercontent.com/20608121/47827793-2d1c7100-ddc3-11e8-972b-dcb4e24fae0c.png)
 
 (무역수지가 양수면 흑자, 음수면 적자) 나라 별로 어떤 품목의 거래가 흑자가 났는지
 적자가 났는지 테이블로 알기 쉽게 볼 수 있다.
 
 ### 5. 상위 5개 국가 무역 내역
 
+![image](https://user-images.githubusercontent.com/20608121/47827794-31488e80-ddc3-11e8-979f-13c83bb98cae.png)
+
 품목을 선택하면 거래 내역이 많았던 5개 국가에 대한 통계 연도그래프로 보여준다.
 
 ### 6. 상위 10개 품목 내역
+
+![image](https://user-images.githubusercontent.com/20608121/47827799-34437f00-ddc3-11e8-9d01-f5439cd319f4.png)
 
 우리나라의 수입,수출에 대한 상위 10개 품목에 대한 연간 변화 테이블이다.
 
